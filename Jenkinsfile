@@ -7,7 +7,7 @@ node {
     def gitURL = "https://github.com/julg/testJenkinsFileFront.git"
     def gitCredentials = ''
     def jsDir = "dist/"
-    def htmlBaseDir = "/var/www/html/licencesNationales"
+    def htmlBaseDir = "/var/www/html/licencesNationales/"
     def slackChannel = "#notif-licencesnationales"
 
     // Variables globales
