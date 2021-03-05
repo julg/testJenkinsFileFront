@@ -119,20 +119,18 @@ node {
 
     stage ('deploy to raiponce'){
         try {
-            if (ENV == 'DEV') {
+             if (ENV == 'DEV') {
                 echo 'deployment on raiponce1-dev'
                 sshagent(credentials: ['raiponce1-dev-ssh-key']) {
-					withCredentials([usernamePassword(credentialsId: 'develuser', passwordVariable: 'pass', usernameVariable: 'username')]) {
-           
+                    withCredentials([usernamePassword(credentialsId: 'develuser', passwordVariable: 'pass', usernameVariable: 'username')]) {
                         sh "ssh -tt devel@raiponce1-dev.v3.abes.fr \"cd ${htmlBaseDir} && rm -rf -d js && rm -rf -d css\""
                         sh "scp -r ${jsDir}* raiponce1-dev.v3.abes.fr:${htmlBaseDir}"
                     }
                 }
-				
 
                 echo 'deployment on raiponce2-dev'
                 sshagent(credentials: ['raiponce2-dev-ssh-key']) {
-					withCredentials([usernamePassword(credentialsId: 'develuser', passwordVariable: 'pass', usernameVariable: 'username')]) {
+                    withCredentials([usernamePassword(credentialsId: 'develuser', passwordVariable: 'pass', usernameVariable: 'username')]) {
                         sh "ssh -tt devel@raiponce2-dev.v3.abes.fr \"cd ${htmlBaseDir} && rm -rf -d js && rm -rf -d css\""
                         sh "scp -r ${jsDir}* raiponce2-dev.v3.abes.fr:${htmlBaseDir}"
                     }
@@ -141,31 +139,35 @@ node {
             if (ENV == 'TEST') {
                 echo 'deployment on raiponce1-test'
                 sshagent(credentials: ['raiponce1-test-ssh-key']) {
+                    withCredentials([usernamePassword(credentialsId: 'develuser', passwordVariable: 'pass', usernameVariable: 'username')]) {
                         sh "ssh -tt devel@raiponce1-test.v3.abes.fr \"cd ${htmlBaseDir} && rm -rf -d js && rm -rf -d css\""
                         sh "scp -r ${jsDir}* devel@raiponce1-test.v3.abes.fr:${htmlBaseDir}"
-                    
+                    }
                 }
 
                 echo 'deployment on raiponce2-test'
                 sshagent(credentials: ['raiponce2-test-ssh-key']) {
+                    withCredentials([usernamePassword(credentialsId: 'develuser', passwordVariable: 'pass', usernameVariable: 'username')]) {
                         sh "ssh -tt devel@raiponce2-test.v3.abes.fr \"cd ${htmlBaseDir} && rm -rf -d js && rm -rf -d css\""
                         sh "scp -r ${jsDir}* devel@raiponce2-test.v3.abes.fr:${htmlBaseDir}"
-                    
+                    }
                 }
             }
             if (ENV == 'PROD') {
                 echo 'deployment on raiponce1-prod'
                 sshagent(credentials: ['raiponce1-prod-ssh-key']) {
+                    withCredentials([usernamePassword(credentialsId: 'develuser', passwordVariable: 'pass', usernameVariable: 'username')]) {
                         sh "ssh -tt devel@raiponce1.v3.abes.fr \"cd ${htmlBaseDir} && rm -rf -d js && rm -rf -d css\""
                         sh "scp -r ${jsDir}* devel@raiponce1.v3.abes.fr:${htmlBaseDir}"
-                    
+                    }
                 }
 
                 echo 'deployment on raiponce2-prod'
                 sshagent(credentials: ['raiponce2-prod-ssh-key']) {
+                    withCredentials([usernamePassword(credentialsId: 'develuser', passwordVariable: 'pass', usernameVariable: 'username')]) {
                         sh "ssh -tt devel@raiponce2.v3.abes.fr \"cd ${htmlBaseDir} && rm -rf -d js && rm -rf -d css\""
                         sh "scp -r ${jsDir}* devel@raiponce2.v3.abes.fr:${htmlBaseDir}"
-                    
+                    }
                 }
             }
 
