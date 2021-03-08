@@ -124,7 +124,7 @@ node {
                 sshagent(credentials: ['raiponce1-dev-ssh-key']) {
                     withCredentials([usernamePassword(credentialsId: 'develuser', passwordVariable: 'pass', usernameVariable: 'username')]) {
                         sh "ssh -tt devel@raiponce1-dev.v3.abes.fr \"cd ${htmlBaseDir} && rm -rf -d js && rm -rf -d css\""
-                        sh "scp -r ${jsDir}*  ${username}raiponce1-dev.v3.abes.fr:${htmlBaseDir}"
+                        sh "scp -r ${jsDir}*  ${username}@raiponce1-dev.v3.abes.fr:${htmlBaseDir}"
                     }
                 }
 
@@ -132,7 +132,7 @@ node {
                 sshagent(credentials: ['raiponce2-dev-ssh-key']) {
                     withCredentials([usernamePassword(credentialsId: 'develuser', passwordVariable: 'pass', usernameVariable: 'username')]) {
                         sh "ssh -tt devel@raiponce2-dev.v3.abes.fr \"cd ${htmlBaseDir} && rm -rf -d js && rm -rf -d css\""
-                        sh "scp -r ${jsDir}*  ${username}raiponce2-dev.v3.abes.fr:${htmlBaseDir}"
+                        sh "scp -r ${jsDir}*  ${username}@raiponce2-dev.v3.abes.fr:${htmlBaseDir}"
                     }
                 }
             }
